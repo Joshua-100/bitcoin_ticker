@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:bitcoin_ticker/bitcoin_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,10 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String currency = currenciesList.first;
+  int? currencyValue;
+  double cryptoBTCEqv = 0;
+  double cryptoETHEqv = 0;
+  double cryptoLTCEqv = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,22 @@ class _PriceScreenState extends State<PriceScreen> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: BitcoinCard(),
+            child: Column(
+              children: [
+                BitcoinCard(
+                    crypto: "BTC",
+                    countryCryptoValue: cryptoBTCEqv,
+                    countryCrypto: currency),
+                BitcoinCard(
+                    crypto: "ETH",
+                    countryCryptoValue: cryptoETHEqv,
+                    countryCrypto: currency),
+                BitcoinCard(
+                    crypto: "LTC",
+                    countryCryptoValue: cryptoLTCEqv,
+                    countryCrypto: currency)
+              ],
+            ),
           ),
           Container(
               height: 150.0,

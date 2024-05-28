@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BitcoinCard extends StatelessWidget {
-  const BitcoinCard({super.key});
+  const BitcoinCard(
+      {required this.crypto,
+      required this.countryCrypto,
+      required this.countryCryptoValue});
+
+  final String countryCrypto;
+  final String crypto;
+  final double countryCryptoValue;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class BitcoinCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
         child: Text(
-          '1 BTC = ? USD',
+          '1 $crypto = $countryCryptoValue $countryCrypto',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20.0,
