@@ -13,7 +13,6 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String currency = currenciesList.first;
-  int? currencyValue;
   double cryptoBTCEqv = 0;
   double cryptoETHEqv = 0;
   double cryptoLTCEqv = 0;
