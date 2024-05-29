@@ -1,8 +1,9 @@
 import 'dart:ffi';
-import 'package:bitcoin_ticker/bitcoin_card.dart';
+import 'package:bitcoin_ticker/services/bitcoining.dart';
+import 'package:bitcoin_ticker/utilities/bitcoin_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'coin_data.dart';
+import '../utilities/coin_data.dart';
 
 const double _kItemExtent = 32.0;
 
@@ -16,6 +17,14 @@ class _PriceScreenState extends State<PriceScreen> {
   double cryptoBTCEqv = 0;
   double cryptoETHEqv = 0;
   double cryptoLTCEqv = 0;
+
+  void updateUI(currentData) {
+    print(currentData);
+    // cryptoBTCEqv = currentData['rate'];
+    // cryptoLTCEqv = currentData['rate'];
+    // cryptoETHEqv = currentData['rate'];
+    // print("$cryptoETHEqv  erjgdfjgdfg tyeeeeeee");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +62,14 @@ class _PriceScreenState extends State<PriceScreen> {
               color: Colors.lightBlue,
               child: CupertinoPicker(
                 itemExtent: _kItemExtent,
-                onSelectedItemChanged: (int value) {
+                onSelectedItemChanged: (int value) async {
+                  currency = currenciesList[value];
+                  // get Bitcoin Data
+                  Bitcoining bitcoing = Bitcoining(currencyCrypto: currency);
+                  var btcData = await bitcoing.getCurrencyCrypto();
                   setState(() {
-                    currency = currenciesList[value];
-                    print(currency);
+                    // Call Update UI with bitcoin data
+                    updateUI(btcData);
                   });
                 },
                 children:
